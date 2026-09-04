@@ -1,0 +1,12 @@
+# gradle-wrapper.jar / gradlew / gradlew.bat 已纳入版本控制，确保 CI 可离线构建
+/.gradle
+/captures/
+/local.properties
+GeneratedPluginRegistrant.java
+.cxx/
+
+# Remember to never publicly share your keystore.
+# See https://flutter.dev/to/reference-keystore
+key.properties
+**/*.keystore
+**/*.jks

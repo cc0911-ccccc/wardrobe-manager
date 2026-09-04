@@ -1,0 +1,8 @@
+# 确保 Gradle 包装脚本在 Linux CI 上保持 LF 行尾，否则 bash 执行会失败
+gradlew text eol=lf
+gradlew.bat text eol=crlf
+*.jar binary
+*.png binary
+*.jpg binary
+*.jks binary
+*.keystore binary

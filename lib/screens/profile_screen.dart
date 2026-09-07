@@ -274,28 +274,28 @@ class ProfileScreen extends StatelessWidget {
             icon: Icons.style,
             title: '风格偏好',
             subtitle: '设置你喜欢的穿搭风格',
-            onTap: () {},
+            onTap: () => _showSoon(context, '风格偏好'),
           ),
           const Divider(height: 1),
           _buildSettingItem(
             icon: Icons.straighten,
             title: '身材数据',
             subtitle: '身高体重等数据',
-            onTap: () {},
+            onTap: () => _showSoon(context, '身材数据'),
           ),
           const Divider(height: 1),
           _buildSettingItem(
             icon: Icons.backup,
             title: '数据备份',
             subtitle: '备份和恢复数据',
-            onTap: () {},
+            onTap: () => _showSoon(context, '数据备份'),
           ),
           const Divider(height: 1),
           _buildSettingItem(
             icon: Icons.info,
             title: '关于',
-            subtitle: '版本 1.0.0',
-            onTap: () {},
+            subtitle: '版本 1.0.6',
+            onTap: () => _showAbout(context),
           ),
         ],
       ),
@@ -314,6 +314,53 @@ class ProfileScreen extends StatelessWidget {
       subtitle: Text(subtitle),
       trailing: const Icon(Icons.chevron_right),
       onTap: onTap,
+    );
+  }
+
+  void _showSoon(BuildContext context, String name) {
+    final messenger = ScaffoldMessenger.of(context);
+    messenger.hideCurrentSnackBar();
+    messenger.showSnackBar(
+      SnackBar(content: Text('「$name」功能在本版本暂未开放')),
+    );
+  }
+
+  void _showAbout(BuildContext context) {
+    showDialog<void>(
+      context: context,
+      builder: (dialogContext) => AlertDialog(
+        title: const Text('关于'),
+        content: const SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Text('衣橱管家', style: TextStyle(fontWeight: FontWeight.bold)),
+              SizedBox(height: 4),
+              Text('版本 1.0.6（社区修复版）'),
+              SizedBox(height: 12),
+              Text('本版本修复了原版大量按钮点击无反应的问题，'
+                  '手动管理衣橱的功能已全部打通：'),
+              SizedBox(height: 8),
+              Text('· 添加 / 编辑 / 删除衣物'),
+              Text('· 分类、位置筛选与搜索'),
+              Text('· 记录每天穿着'),
+              SizedBox(height: 12),
+              Text('AI 拍照识别与语音搭配暂未开放：原作者写死在代码里的'
+                  '演示密钥已失效，且程序内没有填写密钥的入口，'
+                  '因此不做假数据。'),
+              SizedBox(height: 12),
+              Text('衣物数据仅保存在本机，不联网、不上传。'),
+            ],
+          ),
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(dialogContext),
+            child: const Text('知道了'),
+          ),
+        ],
+      ),
     );
   }
 }
